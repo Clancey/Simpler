@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Data\Tasks\BuildParametersUsingTest.cs" />
     <Compile Include="Data\Tasks\BuildParametersTest.cs" />
+    <Compile Include="Data\Tasks\UseDataRecordToBuildDynamicTest.cs" />
     <Compile Include="Data\Tasks\PersistSingleTest.cs" />
     <Compile Include="Data\Tasks\FetchSingleTest.cs" />
     <Compile Include="Data\Tasks\FetchListTest.cs" />
