@@ -6,13 +6,13 @@ using Moq;
 namespace Simpler.Tests.Data.Tasks
 {
     [TestFixture]
-    public class UseDataRecordToBuildDynamicTest
+    public class UseDataRecordToBuildInstanceTest
     {
         [Test]
         public void should_populate_object_using_all_columns_in_the_data_record()
         {
             // Arrange
-            var task = TaskFactory<UseDataRecordToBuildDynamic>.Create();
+            var task = TaskFactory<UseDataRecordToBuildInstance>.Create();
 
             var mockDataRecord = new Mock<IDataRecord>();
             mockDataRecord.Setup(dataRecord => dataRecord.FieldCount).Returns(2);

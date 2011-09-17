@@ -8,7 +8,7 @@ namespace Simpler.Data.Tasks
     /// Task that builds an instance of a dynamic type using the values found in the given DataRecord.  The dynamic object
     /// will contain properties matching all the columns found in the DataRecord.
     /// </summary>
-    public class UseDataRecordToBuildDynamic : Task
+    public class UseDataRecordToBuildInstance : Task
     {
         /// <summary>
         /// Used to create the dynamic Object that is returned by UseDataRecordToBuildDynamic.

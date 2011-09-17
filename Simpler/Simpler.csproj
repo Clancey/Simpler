@@ -52,7 +52,7 @@
     <Compile Include="Data\Tasks\BuildParameters.cs" />
     <Compile Include="Data\Tasks\PersistSingle.cs" />
     <Compile Include="Data\Tasks\FetchSingle.cs" />
-    <Compile Include="Data\Tasks\UseDataRecordToBuildDynamic.cs" />
+    <Compile Include="Data\Tasks\UseDataRecordToBuildInstance.cs" />
     <Compile Include="Data\Tasks\FetchList.cs" />
     <Compile Include="Data\TransactionAttribute.cs" />
     <Compile Include="Examples.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Data\Tasks\FetchSingleOfT.cs" />
     <Compile Include="Data\Tasks\FindParametersInCommandText.cs" />
     <Compile Include="Data\Tasks\PersistSingleOfT.cs" />
-    <Compile Include="Data\Tasks\UseDataRecordToBuild.cs" />
+    <Compile Include="Data\Tasks\UseDataRecordToBuildInstanceOfT.cs" />
     <Compile Include="Injection\Tasks\DisposeSubTasks.cs" />
     <Compile Include="Injection\Tasks\InjectSubTasks.cs" />
     <Compile Include="Construction\Tasks\NotifySubscribersOfTaskExecution.cs" />

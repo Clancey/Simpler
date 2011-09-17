@@ -4,14 +4,15 @@ using Simpler.Data.Exceptions;
 
 namespace Simpler.Data.Tasks
 {
-    // todo - rename to UseDataRecordToBuildStatic and get rid of the T - it isn't needed.  this is a breaking change to anyone using this class
+    // todo - this is a potential (although highly unlikely it would be noticed) breaking name change
+    public class UseDataRecordToBuild<T> : UseDataRecordToBuildInstanceOf<T> {}
 
     /// <summary>
     /// Task that builds an instance of the given type T using the values found in the given DataRecord.  If the DataRecord contains
     /// any columns that match the name of the property on T, then that column's value will be used to set the property.
     /// </summary>
     /// <typeparam name="T">The type of object to build.</typeparam>
-    public class UseDataRecordToBuild<T> : Task
+    public class UseDataRecordToBuildInstanceOf<T> : Task
     {
         // Inputs
         public virtual IDataRecord DataRecord { get; set; }

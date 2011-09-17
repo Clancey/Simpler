@@ -16,12 +16,12 @@ namespace Simpler.Data.Tasks
         public virtual T[] ObjectsFetched { get; private set; }
 
         // Sub-tasks
-        public virtual UseDataRecordToBuild<T> UseDataRecordToBuild { get; set; }
+        public virtual UseDataRecordToBuildInstanceOf<T> UseDataRecordToBuildInstanceOf { get; set; }
 
         public override void Execute()
         {
             // Create the sub-tasks.
-            if (UseDataRecordToBuild == null) UseDataRecordToBuild = new UseDataRecordToBuild<T>();
+            if (UseDataRecordToBuildInstanceOf == null) UseDataRecordToBuildInstanceOf = new UseDataRecordToBuildInstanceOf<T>();
 
             var objectList = new List<T>();
 
@@ -29,9 +29,9 @@ namespace Simpler.Data.Tasks
             {
                 while (dataReader.Read())
                 {
-                    UseDataRecordToBuild.DataRecord = dataReader;
-                    UseDataRecordToBuild.Execute();
-                    objectList.Add(UseDataRecordToBuild.Object);
+                    UseDataRecordToBuildInstanceOf.DataRecord = dataReader;
+                    UseDataRecordToBuildInstanceOf.Execute();
+                    objectList.Add(UseDataRecordToBuildInstanceOf.Object);
                 }
             }
 

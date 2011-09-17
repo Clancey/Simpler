@@ -15,12 +15,12 @@ namespace Simpler.Data.Tasks
         public virtual dynamic[] ObjectsFetched { get; private set; }
 
         // Sub-tasks
-        public virtual UseDataRecordToBuildDynamic UseDataRecordToBuild { get; set; }
+        public virtual UseDataRecordToBuildInstance UseDataRecordToBuild { get; set; }
 
         public override void Execute()
         {
             // Create the sub-tasks.
-            if (UseDataRecordToBuild == null) UseDataRecordToBuild = new UseDataRecordToBuildDynamic();
+            if (UseDataRecordToBuild == null) UseDataRecordToBuild = new UseDataRecordToBuildInstance();
 
             var objectList = new List<dynamic>();
 
