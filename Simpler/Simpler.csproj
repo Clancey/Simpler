@@ -61,10 +61,10 @@
     <Compile Include="Injection\InjectSubTasksAttribute.cs" />
     <Compile Include="Data\Exceptions\NoPropertyForColumnException.cs" />
     <Compile Include="Data\Exceptions\ObjectPersistanceException.cs" />
-    <Compile Include="Data\Tasks\FetchListOf.cs" />
-    <Compile Include="Data\Tasks\FetchSingleOf.cs" />
+    <Compile Include="Data\Tasks\FetchListOfT.cs" />
+    <Compile Include="Data\Tasks\FetchSingleOfT.cs" />
     <Compile Include="Data\Tasks\FindParametersInCommandText.cs" />
-    <Compile Include="Data\Tasks\PersistSingleOf.cs" />
+    <Compile Include="Data\Tasks\PersistSingleOfT.cs" />
     <Compile Include="Data\Tasks\UseDataRecordToBuild.cs" />
     <Compile Include="Injection\Tasks\DisposeSubTasks.cs" />
     <Compile Include="Injection\Tasks\InjectSubTasks.cs" />
