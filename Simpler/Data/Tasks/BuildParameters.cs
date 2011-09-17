@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Data;
 using System.Reflection;
+using Simpler.Data.Exceptions;
 
 namespace Simpler.Data.Tasks
 {
+    // todo - this is obsolete
+    public class BuildParametersUsing<T> : BuildParameters
+    {
+    }
+
     /// <summary>
     /// Task that looks in the given command's CommandText for parameters and uses the given object's property
     /// values to build the command parameters.
@@ -59,9 +65,16 @@ namespace Simpler.Data.Tasks
 
                 // If a matching property exists use it to build the parameter, otherwise set the parameter to null.
                 property = objectType.GetProperty(nameOfPropertyContainingValue);
+
+                // If this is a statically typed ObjectWithValues, then we make sure there is a matching property.
+                if ((property == null) && (objectType.FullName != null) && !objectType.FullName.Contains("AnonymousType"))
+                {
+                    throw new NoPropertyForParameterException(nameOfPropertyContainingValue, objectType.FullName);
+                }
+
                 dbDataParameter.Value = 
-                    property != null 
-                    ? property.GetValue(objectContainingPropertyValue, null) 
+                    property != null
+                    ? property.GetValue(objectContainingPropertyValue, null) ?? DBNull.Value 
                     : DBNull.Value;
 
                 CommandWithParameters.Parameters.Add(dbDataParameter);

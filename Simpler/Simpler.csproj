@@ -61,7 +61,6 @@
     <Compile Include="Injection\InjectSubTasksAttribute.cs" />
     <Compile Include="Data\Exceptions\NoPropertyForColumnException.cs" />
     <Compile Include="Data\Exceptions\ObjectPersistanceException.cs" />
-    <Compile Include="Data\Tasks\BuildParametersUsing.cs" />
     <Compile Include="Data\Tasks\FetchListOf.cs" />
     <Compile Include="Data\Tasks\FetchSingleOf.cs" />
     <Compile Include="Data\Tasks\FindParametersInCommandText.cs" />
