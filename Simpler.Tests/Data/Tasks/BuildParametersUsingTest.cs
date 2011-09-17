@@ -1,6 +1,7 @@
 ﻿using System;
 using Moq;
 using NUnit.Framework;
+using Simpler.Data.Exceptions;
 using Simpler.Data.Tasks;
 using System.Data;
 using Simpler.Tests.Mocks;
@@ -39,7 +40,7 @@ namespace Simpler.Tests.Data.Tasks
         }
 
         [Test]
-        public void should_not_create_parameters_for_parameters_found_in_the_command_text_without_matching_properties_in_the_object()
+        public void should_throw_when_parameters_are_found_in_the_command_text_without_matching_properties_in_the_object()
         {
             // Arrange
             var task = TaskFactory<BuildParametersUsing<MockObject>>.Create();
@@ -56,11 +57,8 @@ namespace Simpler.Tests.Data.Tasks
             mockFindParameters.Setup(findParams => findParams.ParameterNames).Returns(new string[] { "@Whatever" });
             task.FindParametersInCommandText = mockFindParameters.Object;
 
-            // Act
-            task.Execute();
-
-            // Assert
-            mockDbCommand.Verify(dbCommand => dbCommand.Parameters.Add(It.IsAny<IDbDataParameter>()), Times.Never());
+            // Act & Assert
+            Assert.Throws<NoPropertyForParameterException>(task.Execute);
         }
 
         [Test]

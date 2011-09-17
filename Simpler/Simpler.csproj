@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Construction\ExecutionOverrideAttribute.cs" />
     <Compile Include="Construction\ExecutionCallbacksAttribute.cs" />
+    <Compile Include="Data\Exceptions\NoPropertyForParameterException.cs" />
     <Compile Include="Data\Tasks\BuildParameters.cs" />
     <Compile Include="Data\Tasks\PersistSingle.cs" />
     <Compile Include="Data\Tasks\FetchSingle.cs" />

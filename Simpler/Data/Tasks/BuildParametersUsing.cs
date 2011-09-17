@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Reflection;
+using Simpler.Data.Exceptions;
 
 namespace Simpler.Data.Tasks
 {
@@ -71,6 +72,10 @@ namespace Simpler.Data.Tasks
 
                     dbDataParameter.Value = property.GetValue(objectContainingPropertyValue, null) ?? DBNull.Value;
                     CommandWithParameters.Parameters.Add(dbDataParameter);
+                }
+                else
+                {
+                    throw new NoPropertyForParameterException(nameOfPropertyContainingValue, objectType.FullName);
                 }
             }
         }

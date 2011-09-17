@@ -22,7 +22,6 @@ namespace Simpler.Tests.Data.Tasks
             mockDbCommand.Setup(dbCommand => dbCommand.CommandText).Returns("select blah");
             task.CommandWithParameters = mockDbCommand.Object;
 
-            //var mockObject = new MockObject { Name = "John Doe", Age = 21 };
             task.ObjectWithValues = new { Name = "John Doe", Age = 21 };
 
             var mockFindParameters = new Mock<FindParametersInCommandText>();

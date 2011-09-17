@@ -61,7 +61,7 @@ namespace Simpler.Tests.Data.Tasks
             task.DataRecord = mockDataRecord.Object;
 
             // Act & Assert
-            Assert.Throws(typeof(NoPropertyForColumnException), task.Execute);
+            Assert.Throws<NoPropertyForColumnException>(task.Execute);
         }
 
         [Test]
