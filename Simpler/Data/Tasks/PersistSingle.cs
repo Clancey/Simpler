@@ -12,7 +12,7 @@ namespace Simpler.Data.Tasks
     {
         // Inputs
         public virtual IDbCommand PersistCommand { get; set; }
-        public virtual dynamic ObjectToPersist { get; set; }
+        public virtual object ObjectToPersist { get; set; }
 
         // Sub-tasks
         public virtual BuildParameters BuildParameters { get; set; }

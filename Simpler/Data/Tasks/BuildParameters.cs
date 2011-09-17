@@ -12,7 +12,7 @@ namespace Simpler.Data.Tasks
     {
         // Inputs
         public virtual IDbCommand CommandWithParameters { get; set; }
-        public virtual dynamic ObjectWithValues { get; set; }
+        public virtual object ObjectWithValues { get; set; }
 
         // Sub-tasks
         public virtual FindParametersInCommandText FindParametersInCommandText { get; set; }

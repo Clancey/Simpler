@@ -3,7 +3,6 @@ using Simpler.Data.Tasks;
 using Moq;
 using System.Data;
 using Simpler.Data.Exceptions;
-using Simpler.Tests.Mocks;
 
 namespace Simpler.Tests.Data.Tasks
 {

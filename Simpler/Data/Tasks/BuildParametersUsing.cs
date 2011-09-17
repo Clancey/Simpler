@@ -11,9 +11,6 @@ namespace Simpler.Data.Tasks
     // Also this static version will allow the ObjectWithValues to contain a property with a value
     // of null (and the parameter will be set to DBNull).  The dynamic version would require omitting the property completely
     // (which could be handled by the client using linq, but its still a breaking change).
-    //
-    // And, I think the T and dynamic ObjectWithValues could be changed to object ObjectWithValues (its really allowing the acceptance of
-    // an anonymous type).
 
     /// <summary>
     /// Task that looks in the given command's CommandText for parameters and uses the given object's property
