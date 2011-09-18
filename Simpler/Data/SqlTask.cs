@@ -4,6 +4,8 @@ using Simpler.Data.Tasks;
 
 namespace Simpler.Data
 {
+    // todo - just ideas
+
     abstract class SqlTask : Task
     {
         // Inputs
