@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Simpler.Data.Tasks;
 
 namespace Simpler.Data
@@ -10,7 +9,6 @@ namespace Simpler.Data
     {
         // Inputs
         public virtual IDbConnection OpenConnection { get; set; }
-        public virtual object Parameters { get; set; }
     }
 
     abstract class FetchListUsingSqlTask : SqlTask
@@ -30,17 +28,17 @@ namespace Simpler.Data
 
                 // todo - look for a ConnectionName as well?
 
-                if (Parameters != null)
+                if (Inputs != null)
                 {
                     BuildParameters.CommandWithParameters = command;
-                    BuildParameters.ObjectWithValues = this;
+                    BuildParameters.ObjectWithValues = Inputs;
                     BuildParameters.Execute();
                 }
 
                 // Fetch the list of SomeStuff and set the output property.
                 FetchList.SelectCommand = command;
                 FetchList.Execute();
-                Outputs = FetchList.ObjectsFetched;
+                Outputs = new {FetchList.ObjectsFetched};
             }
         }
     }
@@ -58,28 +56,25 @@ namespace Simpler.Data
             ";      
     }
 
-    abstract class PersistSingleUsingSqlTask : SqlTask
-    {
-        // Sub-tasks
-        public BuildParameters BuildParameters { get; set; }
-        public PersistSingle PersistSingle { get; set; }
-
-        public override void Execute()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class PersistSomeStuff : PersistSingleUsingSqlTask
+    class FetchSomeStuffUsingStatics : FetchListUsingSqlTask
     {
         public string Sql =
             @"
-            UPDATE 
+            SELECT 
                 SomeStuff
-            SET 
-                SomeColumn = @SomeColumnNewValue
+            FROM 
+                ABunchOfJoinedTables
             WHERE 
-                SomeTable.SomeColumnOtherColumn = @Parameters.SomeCriteria 
-            ";      
+                OneOfTheTables.SomeColumn = @Parameters.SomeCriteria 
+            ";
+
+        // Outputs
+        public SomeStuff SomeStuff { get; set; }
+
+        public override void Execute()
+        {
+            base.Execute();
+            SomeStuff = Outputs.ObjectsFetched;
+        }
     }
 }
