@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using NUnit.Framework;
+using Simpler.Data;
 using Simpler.Data.Tasks;
 using Moq;
 using System.Data;
@@ -34,6 +36,62 @@ namespace Simpler.Tests.Data.Tasks
             Assert.That(task.ObjectsFetched.Count(), Is.EqualTo(2));
             Assert.That(task.ObjectsFetched[0].Name, Is.EqualTo("John Doe"));
             Assert.That(task.ObjectsFetched[1].Name, Is.EqualTo("Jane Doe"));
+        }
+
+        [Test]
+        public void can_create_the_command_using_inputs()
+        {
+            // Arrange
+            var task = TaskFactory<FetchList>.Create();
+
+            var mockSelectCommand = new Mock<IDbCommand>();
+            mockSelectCommand.Setup(command => command.ExecuteReader()).Returns(new DataTableReader(new DataTable()));
+
+            var mockConnection = new Mock<IDbConnection>();
+            mockConnection.Setup(c => c.CreateCommand()).Returns(mockSelectCommand.Object);
+
+            // Act
+            task.Execute(
+                new FetchListInputs
+                {
+                    Connection = mockConnection.Object,
+                    Sql = "select something"
+                });
+
+            // Assert
+            mockSelectCommand.VerifySet(c => c.CommandText = "select something");
+        }
+
+        // todo - [Test]
+        public void can_create_the_command_and_parameters_using_inputs()
+        {
+            // Arrange
+            var task = TaskFactory<FetchList>.Create();
+
+            // Act
+            task.Execute(
+                new
+                {
+                    Sql = "select something"
+                });
+
+            // Assert
+        }
+
+        // todo - [Test]
+        public void should_use_first_connection_in_config_and_given_sql()
+        {
+            // Arrange
+            var task = TaskFactory<FetchList>.Create();
+
+            // Act
+            task.Execute(
+                new
+                {
+                    Sql = "select something"
+                });
+
+            // Assert
         }
     }
 }

@@ -3,9 +3,18 @@ using System.Data;
 
 namespace Simpler.Data.Tasks
 {
+    // todo - rename to Fetch and have task return Outputs (instead of Task)? would allow this
+            //Fetch.Execute(
+            //    new
+            //    {
+            //        Sql = "select something"
+            //    })
+            //    .ToArray();
+    
     /// <summary>
     /// Task that will create a list of dynamic objects using the results of the given command.
     /// </summary>
+    [BuildSelectCommandFromInputs]
     public class FetchList : Task
     {
         // Inputs
@@ -22,8 +31,14 @@ namespace Simpler.Data.Tasks
             // Create the sub-tasks.
             if (UseDataRecordToBuild == null) UseDataRecordToBuild = new UseDataRecordToBuildInstance();
 
-            var objectList = new List<dynamic>();
+            //if (Inputs != null)
+            //{
+            //    var inputs = (FetchListInputs)(Inputs);
+            //    SelectCommand = inputs.Connection.CreateCommand();
+            //    SelectCommand.CommandText = Inputs.Sql;
+            //}
 
+            var objectList = new List<dynamic>();
             using (var dataReader = SelectCommand.ExecuteReader())
             {
                 while (dataReader.Read())
@@ -33,7 +48,6 @@ namespace Simpler.Data.Tasks
                     objectList.Add(UseDataRecordToBuild.Object);
                 }
             }
-
             ObjectsFetched = objectList.ToArray();
         }
     }

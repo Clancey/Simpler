@@ -1,4 +1,5 @@
-﻿using Simpler.Data.Tasks;
+﻿using System.Data;
+using Simpler.Data.Tasks;
 
 namespace Simpler.Data
 {
@@ -97,4 +98,9 @@ namespace Simpler.Data
         }
     }
 
+    public class FetchListInputs
+    {
+        public IDbConnection Connection { get; set; }
+        public string Sql { get; set; }
+    }
 }
