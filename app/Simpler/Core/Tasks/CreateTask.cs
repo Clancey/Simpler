@@ -5,7 +5,24 @@ namespace Simpler.Core.Tasks
 {
     public class CreateTask : InOutTask<CreateTask.Input, CreateTask.Output>
     {
-        static readonly ProxyGenerator ProxyGenerator = new ProxyGenerator();
+        public static readonly object SyncRoot = new Object();
+        static volatile ProxyGenerator proxyGenerator;
+        static ProxyGenerator ProxyGenerator
+        {
+            get
+            {
+                if (proxyGenerator == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        if (proxyGenerator == null)
+                            proxyGenerator = new ProxyGenerator();
+                    }
+                }
+
+                return proxyGenerator;
+            }
+        }
 
         public class Input
         {
@@ -22,19 +39,23 @@ namespace Simpler.Core.Tasks
 
         public override void Execute()
         {
-            if (In.ExecuteInterceptor == null)
+            lock (SyncRoot)
             {
-                In.ExecuteInterceptor = new ExecuteInterceptor(
-                    invocation =>
-                        {
-                            if (ExecuteTask == null) ExecuteTask = new ExecuteTask();
-                            ExecuteTask.In.Task = (Task)invocation.InvocationTarget;
-                            ExecuteTask.In.Invocation = invocation;
-                            ExecuteTask.Execute();
-                        });
-            }
+                if (In.ExecuteInterceptor == null)
+                {
+                    In.ExecuteInterceptor = new ExecuteInterceptor(
+                        In.TaskType.FullName,
+                        invocation =>
+                            {
+                                if (ExecuteTask == null) ExecuteTask = new ExecuteTask();
+                                ExecuteTask.In.Task = (Task) invocation.InvocationTarget;
+                                ExecuteTask.In.Invocation = invocation;
+                                ExecuteTask.Execute();
+                            });
+                }
 
-            Out.TaskInstance = ProxyGenerator.CreateClassProxy(In.TaskType, In.ExecuteInterceptor);
+                Out.TaskInstance = ProxyGenerator.CreateClassProxy(In.TaskType, In.ExecuteInterceptor);
+            }
         }
     }
 }

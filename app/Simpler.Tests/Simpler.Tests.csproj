@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Mocks\MockGrandparentSlowTask.cs" />
+    <Compile Include="Core\Mocks\MockParentSlowTask.cs" />
     <Compile Include="Core\Mocks\MockSlowTask.cs" />
     <Compile Include="FakeTest.cs" />
     <Compile Include="Core\Mocks\MockComplexObject.cs" />
